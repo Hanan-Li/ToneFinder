@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Insta485</title>
+    <link rel="stylesheet" href="/static/css/style.css/">
+    <meta charset="UTF-8">
+</head>
+
+<body>
+<div>
+    <div>
+        <p style="font-size:40px; font-weight:bold;"> 
+            <a href="/">Insta485</a>
+            <span style="float:right; font-size:20px; font-weight:normal">
+                <a href="/explore/">explore</a> | <a href="{{ '/u/%s/'%logname }}">{{ logname }}</a>
+            </span>
+        </p>
+    </div>
+    <hr>
+
+</div>
+    <div id="reactFeedEntry">Loading feed ...</div>
+
+    <!-- Load JavaScript -->
+    <script type="text/javascript" src="/static/js/bundle.js"></script>
+</body>
+
+
+</html>

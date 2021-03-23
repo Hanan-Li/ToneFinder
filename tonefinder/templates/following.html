@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Insta485</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <meta charset="UTF-8">
+</head>
+<body>
+<div>
+    <div>
+        <p style="font-size:40px; font-weight:bold;"> 
+            <a href="/">Insta485</a>
+            <span style="float:right; font-size:20px; font-weight:normal">
+                <a href="/explore/">explore</a> | <a href="{{ '/u/%s/'%logname }}">{{ logname }}</a>
+            </span>
+        </p>
+    </div>
+    <hr>
+    <h1> Following</h1>
+    {% for follower in following %}
+    <div class ="follow">
+        <img src="{{ url_for('get_image', filename=follower.user_img_url) }}" alt="{{ follower.username }} profile pic" style="width:50px;height:50px;">
+        <a href="{{ '/u/%s/'%follower.username }}">{{ follower.username }}</a>
+        <span style='float:right'> 
+
+        {% if follower.username!=logname %}
+
+            {% if follower.logname_follows_username %}
+            following
+            <!-- DO NOT CHANGE THIS (aside from where we say 'FIXME') -->
+            <form action="" method="post" enctype="multipart/form-data">
+            <input type="submit" name="unfollow" value="unfollow"/>
+            <input type="hidden" name="username" value="{{ follower.username }}"/>
+            </form>
+
+            {% else %}
+            not following
+            <!-- DO NOT CHANGE THIS (aside from where we say 'FIXME') -->
+            <form action="" method="post" enctype="multipart/form-data">
+            <input type="submit" name="follow" value="follow"/>
+            <input type="hidden" name="username" value="{{ follower.username }}"/>
+            </form>
+
+            {% endif %}
+        {% endif %}
+        </span>
+    </div>
+    {% endfor %}
+</div>
+</body>
+
+</html>

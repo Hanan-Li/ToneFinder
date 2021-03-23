@@ -1,0 +1,46 @@
+.post {
+    width: 600px;
+    border: 1px solid black;
+    padding: 5px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.upload {
+    width: 600px;
+    border: 1px solid black;
+    padding: 5px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.person {
+    font-weight: bold;
+}
+
+.postimage{
+    height: 100%; 
+    width: 100%; 
+    object-fit: contain
+}
+
+.follow{
+    width: 800px;
+    border: 1px solid black;
+    padding: 5px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.profile_pic{
+    width:50px;
+    height:50px;
+}
+
+.timestamp{
+    float:right;
+}
