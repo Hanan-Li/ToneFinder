@@ -3,7 +3,7 @@ import flask
 import tonefinder
 
 
-@insta485.app.route('/api/v1/', methods=["GET"])
+@tonefinder.app.route('/api/v1/', methods=["GET"])
 def get_v1():
     """Return likes on postid.
 
@@ -14,7 +14,7 @@ def get_v1():
     }
     """
     context = {}
-    if insta485.model.check_403(context, flask.session):
+    if tonefinder.model.check_403(context, flask.session):
         return flask.jsonify(**context), 403
     # User
 

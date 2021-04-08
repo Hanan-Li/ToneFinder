@@ -1,42 +1,23 @@
 """Insta485 model (database) API."""
 import sqlite3
+import MySQLdb
+import MySQLdb.cursors
 import flask
 import tonefinder
 
 
-def dict_factory(cursor, row):
-    """
-    Convert database row objects to a dictionary.
-
-    This is useful for building dictionaries which are then used.
-    to render a template.
-    Note that this would be inefficient for large queries.
-    """
-    output = {}
-    for idx, col in enumerate(cursor.description):
-        output[col[0]] = row[idx]
-    return output
-
-
 def get_db():
     """Open a new database connection."""
-    if not hasattr(flask.g, 'sqlite_db'):
-        flask.g.sqlite_db = sqlite3.connect(
-            insta485.app.config['DATABASE_FILENAME'])
-        flask.g.sqlite_db.row_factory = dict_factory
-
-        # Foreign keys have to be enabled per-connection.  This is an sqlite3
-        # backwards compatibility thing.
-        flask.g.sqlite_db.execute("PRAGMA foreign_keys = ON")
-
+    if not hasattr(flask.g, 'db'):
+        flask.g.sqlite_db = MySQLdb.connect(host="tonefinder-db.cluster-czjdy4yl1hn3.us-east-2.rds.amazonaws.com",user="admin", passwd="Bee_dave_1998",db="tonefinder", cursorclass=MySQLdb.cursors.DictCursor)
     return flask.g.sqlite_db
 
 
-@insta485.app.teardown_appcontext
+@tonefinder.app.teardown_appcontext
 def close_db(error):
     # pylint: disable=unused-argument
     """Close the database at the end of a request."""
-    if hasattr(flask.g, 'sqlite_db'):
+    if hasattr(flask.g, 'db'):
         flask.g.sqlite_db.commit()
         flask.g.sqlite_db.close()
 

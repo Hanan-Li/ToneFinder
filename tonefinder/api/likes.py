@@ -1,9 +1,9 @@
 """REST API for likes."""
 import flask
-import insta485
+import tonefinder
 
 
-@insta485.app.route('/api/v1/p/<int:postid_url_slug>/likes/',
+@tonefinder.app.route('/api/v1/p/<int:postid_url_slug>/likes/',
                     methods=["GET", "POST", "DELETE"])
 def get_likes(postid_url_slug):
     """Return likes on postid.
@@ -17,11 +17,11 @@ def get_likes(postid_url_slug):
     }
     """
     context = {}
-    if insta485.model.check_403(context, flask.session):
+    if tonefinder.model.check_403(context, flask.session):
         return flask.jsonify(**context), 403
     # User
     logname = flask.session['username']
-    connection = insta485.model.get_db()
+    connection = tonefinder.model.get_db()
     cur = connection.execute(
         "SELECT EXISTS(SELECT * FROM posts WHERE postid = ?) AS pog;",
         (postid_url_slug,)

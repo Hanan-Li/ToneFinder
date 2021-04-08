@@ -1,9 +1,9 @@
 """REST API for v1."""
 import flask
-import insta485
+import tonefinder
 
 
-@insta485.app.route('/api/v1/p/<int:postid_url_slug>/', methods=["GET"])
+@tonefinder.app.route('/api/v1/p/<int:postid_url_slug>/', methods=["GET"])
 def get_postid(postid_url_slug):
     """Return likes on postid.
 
@@ -14,17 +14,17 @@ def get_postid(postid_url_slug):
     }
     """
     context = {}
-    if insta485.model.check_403(context, flask.session):
+    if tonefinder.model.check_403(context, flask.session):
         return flask.jsonify(**context), 403
 
     # User
-    connection = insta485.model.get_db()
+    connection = tonefinder.model.get_db()
     cur = connection.execute(
         "SELECT EXISTS(SELECT * FROM posts WHERE postid = ?) AS kek;",
         (postid_url_slug,)
     )
     exists = cur.fetchone()["kek"]
-    if insta485.model.check_404(context, exists):
+    if tonefinder.model.check_404(context, exists):
         return flask.jsonify(**context), 404
 
     cur = connection.execute(

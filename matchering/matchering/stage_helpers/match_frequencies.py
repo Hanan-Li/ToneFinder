@@ -26,7 +26,6 @@ from scipy import signal, interpolate
 from ..log import debug
 from .. import Config
 from ..dsp import ms_to_lr, smooth_lowess
-import matplotlib.pyplot as plt
 
 def __average_fft(
     loudest_pieces: np.ndarray, sample_rate: int, fft_size: int

@@ -1,9 +1,9 @@
 """REST API for v1."""
 import flask
-import insta485
+import tonefinder
 
 
-@insta485.app.route('/api/v1/p/<int:postid_url_slug>/comments/',
+@tonefinder.app.route('/api/v1/p/<int:postid_url_slug>/comments/',
                     methods=["GET", "POST"])
 def get_comments(postid_url_slug):
     """Return likes on postid.
@@ -15,15 +15,15 @@ def get_comments(postid_url_slug):
     }
     """
     context = {}
-    if insta485.model.check_403(context, flask.session):
+    if tonefinder.model.check_403(context, flask.session):
         return flask.jsonify(**context), 403
-    connection = insta485.model.get_db()
+    connection = tonefinder.model.get_db()
     cur = connection.execute(
         "SELECT EXISTS(SELECT * FROM posts WHERE postid = ?) AS pogchamp;",
         (postid_url_slug,)
     )
     exists = cur.fetchone()["pogchamp"]
-    if insta485.model.check_404(context, exists):
+    if tonefinder.model.check_404(context, exists):
         return flask.jsonify(**context), 404
     # User
     logname = flask.session['username']

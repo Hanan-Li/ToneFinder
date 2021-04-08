@@ -50,11 +50,11 @@ def get_file():
         file = flask.request.files["file"]
         file.save(temp_filename)
         # Compute filename
-        hash_txt = insta485.views.util.sha256sum(temp_filename)
+        hash_txt = tonefinder.views.util.sha256sum(temp_filename)
         dummy, suffix = os.path.splitext(file.filename)
         hash_filename_basename = hash_txt + suffix
         hash_filename = os.path.join(
-            insta485.app.config["UPLOAD_FOLDER"],
+            tonefinder.app.config["UPLOAD_FOLDER"],
             hash_filename_basename
         )
 
@@ -62,3 +62,19 @@ def get_file():
         shutil.move(temp_filename, hash_filename)
         filename = hash_filename_basename
     return filename
+
+def save_file():
+    src_filname = ''
+    ref_filename = ''
+    if flask.request.files.get('source') is not None:
+        dummy, temp_filename = tempfile.mkstemp()
+        file = flask.request.files["source"]
+        file.save(temp_filename)
+        src_filname = temp_filename
+    if flask.request.files.get('reference') is not None:
+        dummy, temp_filename = tempfile.mkstemp()
+        file = flask.request.files["reference"]
+        file.save(temp_filename)
+        ref_filename = temp_filename
+    return src_filname, ref_filename
+    
