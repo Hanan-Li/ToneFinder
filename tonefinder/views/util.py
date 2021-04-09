@@ -68,11 +68,13 @@ def save_file():
     ref_filename = ''
     if flask.request.files.get('source') is not None:
         dummy, temp_filename = tempfile.mkstemp()
+        temp_filename = temp_filename + '.wav'
         file = flask.request.files["source"]
         file.save(temp_filename)
         src_filname = temp_filename
     if flask.request.files.get('reference') is not None:
         dummy, temp_filename = tempfile.mkstemp()
+        temp_filename = temp_filename + '.wav'
         file = flask.request.files["reference"]
         file.save(temp_filename)
         ref_filename = temp_filename

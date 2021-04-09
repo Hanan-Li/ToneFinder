@@ -29,13 +29,16 @@ def show_index():
         if flask.request.method == 'POST':
             print(flask.request.files)
             src_file, ref_file = tonefinder.views.util.save_file()
-            
+            print("src file", src_file)
+            print("ref file", ref_file)
             if src_file is not None and ref_file is not None:
-                target_file = src_file[:-3] + ".wav"
-                print(target_file)
+                target_file = src_file[5:]
+                print("target file", target_file)
                 target_path = os.path.join(tonefinder.app.config['TRANSFORMED_FOLDER'], target_file)
-                ir = src_file[:-3] + ref_file[:-3] + "_ir.wav"
+                ir = src_file[5:-4] + "_" + ref_file[5:-4] + "_ir.wav"
                 ir_path = os.path.join(tonefinder.app.config['IR_FOLDER'], ir)
+                print(target_path)
+                print(ir_path)
                 mg.process(
                     target=src_file,
                     reference=ref_file,
@@ -43,8 +46,8 @@ def show_index():
                     # You can also use the Result class to make some advanced results
                     results=[
                         mg.Result(
-                            target_file, subtype="PCM_24", use_limiter=False
-                        ),
+                            target_path, subtype="PCM_24", use_limiter=False
+                        )
                     ],
                     ir_file = ir_path
                 )
@@ -71,12 +74,12 @@ def show_index():
 #                                      filename)
 
 @tonefinder.app.route('/ir_file/<filename>', methods=['GET', 'POST'])
-def get_ir():
+def get_ir(filename):
     return flask.send_from_directory(tonefinder.app.config['IR_FOLDER'],
                                      filename)
 
 @tonefinder.app.route('/transformed_file/<filename>', methods=['GET', 'POST'])
-def get_transformed():
+def get_transformed(filename):
     return flask.send_from_directory(tonefinder.app.config['TRANSFORMED_FOLDER'],
                                      filename)
 

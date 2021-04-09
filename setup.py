@@ -17,5 +17,6 @@ setup(
         'Flask-Testing==0.7.1',
         'requests==2.21.0',
         'sh==1.12.14',
+        'mysqlclient==2.0.3'
     ],
 )

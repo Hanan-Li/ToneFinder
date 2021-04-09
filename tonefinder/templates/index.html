@@ -83,11 +83,11 @@
     </div>
 
     {% if submitted %}
-    <div class="container-fluid">
-        <a href="{{ '/transformed_file/'%transformed }}" download>
+    <div class="d-flex justify-content-center">
+        <a href="transformed_file/{{ transformed }}" download >
             <img src="/static/images/music_icon.png" alt="Music Icon" width="104" height="142">
         </a>
-        <a href="{{ '/ir_file/'%irfile }}" download>
+        <a href="ir_file/{{ irfile }}" download>
             <img src="/static/images/music_icon.png" alt="Music Icon" width="104" height="142">
         </a>
     </div>
