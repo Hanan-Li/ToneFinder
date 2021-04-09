@@ -29,6 +29,7 @@ def show_index():
         if flask.request.method == 'POST':
             print(flask.request.files)
             src_file, ref_file = tonefinder.views.util.save_file()
+            target_file = src_file[:-3] + ".wav"
             if src_file is not None and ref_file is not None:
                 mg.process(
                     target=src_file,
@@ -37,7 +38,7 @@ def show_index():
                     # You can also use the Result class to make some advanced results
                     results=[
                         mg.Result(
-                            "custom_result_24bit_no_limiter.wav", subtype="PCM_24", use_limiter=False
+                            target_file, subtype="PCM_24", use_limiter=False
                         ),
                     ],
                     ir_file = "mid_ir.wav"
@@ -45,7 +46,6 @@ def show_index():
         return flask.render_template("index.html", **final_dict)
     else:
         return flask.redirect(flask.url_for('login'))
-    # return flask.redirect(flask.url_for('login'))
 
 
 
@@ -60,3 +60,17 @@ def show_index():
 #         return flask.abort(404)
 #     return flask.send_from_directory(insta485.app.config['UPLOAD_FOLDER'],
 #                                      filename)
+
+@tonefinder.app.route('/ir_file/<filename>', methods=['GET', 'POST'])
+def get_ir():
+    return flask.abort(404)
+
+
+@tonefinder.app.route('/uploads/<filename>')
+def get_image(filename):
+    """Get image."""
+    if not os.path.isfile(os.path.join(tonefinder.app.config['UPLOAD_FOLDER'],
+                                       filename)):
+        return flask.abort(404)
+    return flask.send_from_directory(tonefinder.app.config['UPLOAD_FOLDER'],
+                                     filename)
