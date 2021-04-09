@@ -9,7 +9,7 @@ import tonefinder
 def get_db():
     """Open a new database connection."""
     if not hasattr(flask.g, 'db'):
-        flask.g.sqlite_db = MySQLdb.connect(host="tonefinder-db.cluster-czjdy4yl1hn3.us-east-2.rds.amazonaws.com",user="admin", passwd="Bee_dave_1998",db="tonefinder", cursorclass=MySQLdb.cursors.DictCursor)
+        flask.g.sqlite_db = MySQLdb.connect(host="tf-db.czjdy4yl1hn3.us-east-2.rds.amazonaws.com",user="admin", passwd="Bee_dave_1998",db="tonefinder", cursorclass=MySQLdb.cursors.DictCursor)
     return flask.g.sqlite_db
 
 

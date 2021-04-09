@@ -15,14 +15,22 @@ SECRET_KEY = K
 SESSION_COOKIE_NAME = 'login'
 
 # File Upload to var/uploads/
-UPLOAD_FOLDER = os.path.join(
+IR_FOLDER = os.path.join(
     os.path.dirname(os.path.dirname(os.path.realpath(__file__))),
-    'var', 'uploads'
+    'var', 'ir'
 )
 
-IMAGE_FOLDER = os.path.join(
-    
+GUITAR_FOLDER = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.realpath(__file__))),
+    'var', 'guitar'
 )
+
+TRANSFORMED_FOLDER = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.realpath(__file__))),
+    'var', 'transformed'
+)
+
+
 ALLOWED_EXTENSIONS = set(['wav'])
 MAX_CONTENT_LENGTH = 16 * 1024 * 1024
 

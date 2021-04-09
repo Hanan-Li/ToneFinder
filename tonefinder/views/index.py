@@ -29,8 +29,13 @@ def show_index():
         if flask.request.method == 'POST':
             print(flask.request.files)
             src_file, ref_file = tonefinder.views.util.save_file()
-            target_file = src_file[:-3] + ".wav"
+            
             if src_file is not None and ref_file is not None:
+                target_file = src_file[:-3] + ".wav"
+                print(target_file)
+                target_path = os.path.join(tonefinder.app.config['TRANSFORMED_FOLDER'], target_file)
+                ir = src_file[:-3] + ref_file[:-3] + "_ir.wav"
+                ir_path = os.path.join(tonefinder.app.config['IR_FOLDER'], ir)
                 mg.process(
                     target=src_file,
                     reference=ref_file,
@@ -41,8 +46,12 @@ def show_index():
                             target_file, subtype="PCM_24", use_limiter=False
                         ),
                     ],
-                    ir_file = "mid_ir.wav"
+                    ir_file = ir_path
                 )
+                final_dict['submitted'] = True
+                final_dict['transformed'] = target_file
+                final_dict['irfile'] = ir
+
         return flask.render_template("index.html", **final_dict)
     else:
         return flask.redirect(flask.url_for('login'))
@@ -63,8 +72,13 @@ def show_index():
 
 @tonefinder.app.route('/ir_file/<filename>', methods=['GET', 'POST'])
 def get_ir():
-    return flask.abort(404)
+    return flask.send_from_directory(tonefinder.app.config['IR_FOLDER'],
+                                     filename)
 
+@tonefinder.app.route('/transformed_file/<filename>', methods=['GET', 'POST'])
+def get_transformed():
+    return flask.send_from_directory(tonefinder.app.config['TRANSFORMED_FOLDER'],
+                                     filename)
 
 @tonefinder.app.route('/uploads/<filename>')
 def get_image(filename):

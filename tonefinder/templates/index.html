@@ -64,7 +64,7 @@
         <form action="" method="post" enctype="multipart/form-data" class = 'card p-3 bg-light'>
             <div style="text-align: center;">
                 <select class="form-select" aria-label="Default select example">
-                    <option selected>Use IR Profile as Reference</option>
+                    <option selected>Use Guitar Profile as Reference</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
                     <option value="3">Three</option>
@@ -84,10 +84,10 @@
 
     {% if submitted %}
     <div class="container-fluid">
-        <a href="{{ '/transformed_file/'transformed }}" download>
+        <a href="{{ '/transformed_file/'%transformed }}" download>
             <img src="/static/images/music_icon.png" alt="Music Icon" width="104" height="142">
         </a>
-        <a href="{{ '/ir_file/'irfile }}" download>
+        <a href="{{ '/ir_file/'%irfile }}" download>
             <img src="/static/images/music_icon.png" alt="Music Icon" width="104" height="142">
         </a>
     </div>
