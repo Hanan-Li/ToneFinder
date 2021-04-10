@@ -8,6 +8,7 @@ $('#more_info').change(function() {
         $("#conditional_part").show();
   }
 });
+
 const irform = document.getElementById('irform')
 irform.addEventListener('submit', event => {
   // submit event detected
@@ -30,3 +31,17 @@ irform.addEventListener('submit', event => {
       $("#hidden").text("Successfully created IR Profile! Check it at the IR Profile Page");
     })
 })
+
+document.addEventListener("DOMContentLoaded", function(){
+      fetch('/api/v1/save_ir')
+      .then(response => response.json())
+      .then(data => {
+            console.log('Success:', data);
+            let inner = "";
+            for(var i = 0; i < data["guitar_files"].length; i++){
+                  inner += `<option value=\"${i}\">${data["guitar_files"][i]["name"]}/</option>\n`;
+            }
+            $('#guitar_select').append(inner);
+          })
+
+  });
