@@ -65,18 +65,22 @@ def get_file():
 
 def save_file():
     src_filname = ''
+    input_src = ''
     ref_filename = ''
+    input_ref = ''
     if flask.request.files.get('source') is not None:
         dummy, temp_filename = tempfile.mkstemp()
         temp_filename = temp_filename + '.wav'
         file = flask.request.files["source"]
         file.save(temp_filename)
         src_filname = temp_filename
+        input_src = file.filename
     if flask.request.files.get('reference') is not None:
         dummy, temp_filename = tempfile.mkstemp()
         temp_filename = temp_filename + '.wav'
         file = flask.request.files["reference"]
         file.save(temp_filename)
         ref_filename = temp_filename
-    return src_filname, ref_filename
+        input_dst = file.filename
+    return src_filname, ref_filename, input_src, input_dst
     

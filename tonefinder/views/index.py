@@ -25,20 +25,23 @@ def show_index():
         user = flask.session['username']
         final_dict['login'] = True
         final_dict['username'] = user
+        final_dict['submitted'] = False
         # Database portion
         if flask.request.method == 'POST':
-            print(flask.request.files)
-            src_file, ref_file = tonefinder.views.util.save_file()
-            print("src file", src_file)
-            print("ref file", ref_file)
-            if src_file is not None and ref_file is not None:
-                target_file = src_file[5:]
-                print("target file", target_file)
-                target_path = os.path.join(tonefinder.app.config['TRANSFORMED_FOLDER'], target_file)
-                ir = src_file[5:-4] + "_" + ref_file[5:-4] + "_ir.wav"
-                ir_path = os.path.join(tonefinder.app.config['IR_FOLDER'], ir)
-                print(target_path)
-                print(ir_path)
+            src_file, ref_file, input_src, input_ref = tonefinder.views.util.save_file()
+            print(src_file)
+            if src_file != "" and ref_file != "":
+                target_file = input_src
+                target_dir = os.path.join(tonefinder.app.config['TRANSFORMED_FOLDER'], user)
+                if not os.path.isdir(target_dir):
+                    os.mkdir(target_dir)
+                target_path = os.path.join(target_dir, target_file)
+
+                ir = input_src[:-4] + "_" + input_ref[:-4] + "_ir.wav"
+                ir_dir = os.path.join(tonefinder.app.config['IR_FOLDER'], user)
+                if not os.path.isdir(ir_dir):
+                    os.mkdir(ir_dir)
+                ir_path = os.path.join(ir_dir, ir)
                 mg.process(
                     target=src_file,
                     reference=ref_file,
@@ -64,30 +67,18 @@ def show_index():
 # -------------------------------------------------------------------------------
 
 
-# @insta485.app.route('/uploads/<filename>')
-# def get_image(filename):
-#     """Get image."""
-#     if not os.path.isfile(os.path.join(insta485.app.config['UPLOAD_FOLDER'],
-#                                        filename)):
-#         return flask.abort(404)
-#     return flask.send_from_directory(insta485.app.config['UPLOAD_FOLDER'],
-#                                      filename)
+
 
 @tonefinder.app.route('/ir_file/<filename>', methods=['GET', 'POST'])
 def get_ir(filename):
-    return flask.send_from_directory(tonefinder.app.config['IR_FOLDER'],
+    username = flask.session['username']
+    directory = os.path.join(tonefinder.app.config['IR_FOLDER'], username)
+    return flask.send_from_directory(directory,
                                      filename)
 
 @tonefinder.app.route('/transformed_file/<filename>', methods=['GET', 'POST'])
 def get_transformed(filename):
-    return flask.send_from_directory(tonefinder.app.config['TRANSFORMED_FOLDER'],
-                                     filename)
-
-@tonefinder.app.route('/uploads/<filename>')
-def get_image(filename):
-    """Get image."""
-    if not os.path.isfile(os.path.join(tonefinder.app.config['UPLOAD_FOLDER'],
-                                       filename)):
-        return flask.abort(404)
-    return flask.send_from_directory(tonefinder.app.config['UPLOAD_FOLDER'],
+    username = flask.session['username']
+    directory = os.path.join(tonefinder.app.config['TRANSFORMED_FOLDER'], username)
+    return flask.send_from_directory(directory,
                                      filename)

@@ -6,7 +6,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     
     <!-- JavaScript Bundle with Popper -->
-    
+    <link href="/static/css/main_style.css" rel="stylesheet">    
     <meta charset="UTF-8">
 </head>
 
@@ -61,13 +61,11 @@
     <p class="text-center">Upload your own guitar recording on the left, and the guitar recording that you want your own to sound like on the right!</p> 
     
     <div class="container-fluid">
-        <form action="" method="post" enctype="multipart/form-data" class = 'card p-3 bg-light'>
+        <form action="" method="post" enctype="multipart/form-data" class='card p-3 bg-light' name="main-form">
             <div style="text-align: center;">
                 <select class="form-select" aria-label="Default select example">
-                    <option selected>Use Guitar Profile as Reference</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option selected>Reference to use</option>
+                    <option value="1">Use Uploaded Reference File</option>
                   </select>
             </div>
             <div class="input-group">
@@ -83,20 +81,40 @@
     </div>
 
     {% if submitted %}
-    <div class="d-flex justify-content-center">
+    <div class="container-fluid">
         <a href="transformed_file/{{ transformed }}" download >
-            <img src="/static/images/music_icon.png" alt="Music Icon" width="104" height="142">
+            <img src="/static/images/music_icon.png" alt="Music Icon" width="100" height="100">
         </a>
         <a href="ir_file/{{ irfile }}" download>
-            <img src="/static/images/music_icon.png" alt="Music Icon" width="104" height="142">
+            <img src="/static/images/music_icon.png" alt="Music Icon" width="100" height="100">
         </a>
+        <form class='card p-3 bg-light' id="irform">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="more_info">
+                <label class="form-check-label" for="defaultCheck1">
+                    Save IR File To An IR Profile
+                </label>
+            </div>
+            <div class="mb-3" id="conditional_part">
+                <label for="ir_profile_name" class="form-label">Name For IR Profile</label>
+                <input type="text" class="form-control" id="ir_profile_name">
+                <input type="hidden" id="ir_filename" name="ir_filename" value="{{ irfile }}">
+                <div style="text-align: center;">
+                    <button class="btn btn-outline-primary" type="submit" id="inputGroupFileAddon04">Create IR Profile</button>
+                </div>
+            </div>
+            
+        </form>
+        <div class="d-flex justify-content-center" id="hidden">
+        </div>
     </div>
     {% endif %}
 
 
     <!-- Load JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-
+    <script src="/static/js/main.js"></script>
 </body>
 
 
