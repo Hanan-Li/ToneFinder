@@ -69,7 +69,7 @@ def show_index():
 
 
 
-@tonefinder.app.route('/ir_file/<filename>', methods=['GET', 'POST'])
+@tonefinder.app.route('/ir_file/<filename>', methods=['GET'])
 def get_ir(filename):
     username = flask.session['username']
     directory = os.path.join(tonefinder.app.config['IR_FOLDER'], username)

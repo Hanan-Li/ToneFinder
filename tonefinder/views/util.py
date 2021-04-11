@@ -84,3 +84,15 @@ def save_file():
         input_dst = file.filename
     return src_filname, ref_filename, input_src, input_dst
     
+def save_guitar_file():
+    src_filname = ''
+    input_src = ''
+    ref_filename = ''
+    input_ref = ''
+    if flask.request.files.get('guitar_filesource') is not None:
+        dummy, temp_filename = tempfile.mkstemp()
+        temp_filename = temp_filename + '.wav'
+        file = flask.request.files["guitar_filesource"]
+        file.save(temp_filename)
+        src_filname = temp_filename
+    return src_filname

@@ -53,7 +53,7 @@ def signup():
         res = next((sub for sub in usernames if sub['username'] == username), None)
         if res is None:
             password = tonefinder.views.util.sha512(flask.request.form['password'])
-            cursor.execute("""INSERT `users` (`username`, `password`) VALUES (%s, %s)""",(username, password))
+            cursor.execute("""INSERT INTO `users` (`username`, `password`) VALUES (%s, %s)""",(username, password))
             conn.commit()
             flask.session['username'] = flask.request.form['username']
             return flask.redirect(flask.url_for('show_index'))

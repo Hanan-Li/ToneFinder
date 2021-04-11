@@ -33,7 +33,7 @@ irform.addEventListener('submit', event => {
 })
 
 document.addEventListener("DOMContentLoaded", function(){
-      fetch('/api/v1/save_ir')
+      fetch('/api/v1/get_guitar_profile')
       .then(response => response.json())
       .then(data => {
             console.log('Success:', data);

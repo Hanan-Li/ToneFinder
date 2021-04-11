@@ -61,51 +61,55 @@
     <p class="text-center">Upload your own guitar recording on the left, and the guitar recording that you want your own to sound like on the right!</p> 
     
     <div class="container-fluid">
-        <form action="" method="post" enctype="multipart/form-data" class='card p-3 bg-light' name="main-form">
-            <div style="text-align: center;">
-                <select class="form-select" aria-label="Default select example" id="guitar_select">
-                    <option selected>Reference to use</option>
-                    <option value="1">Use Uploaded Reference File</option>
-                  </select>
-            </div>
-            <div class="input-group">
-                <label for="source" class="col-form-label">Source: </label>
-                <input type="file" class="form-control" id="source" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name='source'>
-                <label for="reference" class="col-form-label">Reference: </label>
-                <input type="file" class="form-control" id="reference" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name='reference'>   
-            </div>
-            <div style="text-align: center;">
-                <button class="btn btn-outline-primary" type="submit" id="inputGroupFileAddon04">Upload</button>
-            </div>
-        </form>
+        <div class="container">
+            <form action="" method="post" enctype="multipart/form-data" class='card p-3 bg-light' name="main-form">
+                <div style="text-align: center;">
+                    <select class="form-select" aria-label="Default select example" id="guitar_select">
+                        <option selected>Reference to use</option>
+                        <option value="1">Use Uploaded Reference File</option>
+                      </select>
+                </div>
+                <div class="input-group">
+                    <label for="source" class="col-form-label">Source: </label>
+                    <input type="file" class="form-control" id="source" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name='source'>
+                    <label for="reference" class="col-form-label">Reference: </label>
+                    <input type="file" class="form-control" id="reference" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name='reference'>   
+                </div>
+                <div style="text-align: center;">
+                    <button class="btn btn-outline-primary" type="submit" id="inputGroupFileAddon04">Upload</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     {% if submitted %}
     <div class="container-fluid">
-        <a href="transformed_file/{{ transformed }}" download >
-            <img src="/static/images/music_icon.png" alt="Music Icon" width="100" height="100">
-        </a>
-        <a href="ir_file/{{ irfile }}" download>
-            <img src="/static/images/music_icon.png" alt="Music Icon" width="100" height="100">
-        </a>
-        <form class='card p-3 bg-light' id="irform">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="more_info">
-                <label class="form-check-label" for="defaultCheck1">
-                    Save IR File To An IR Profile
-                </label>
-            </div>
-            <div class="mb-3" id="conditional_part">
-                <label for="ir_profile_name" class="form-label">Name For IR Profile</label>
-                <input type="text" class="form-control" id="ir_profile_name">
-                <input type="hidden" id="ir_filename" name="ir_filename" value="{{ irfile }}">
-                <div style="text-align: center;">
-                    <button class="btn btn-outline-primary" type="submit" id="inputGroupFileAddon04">Create IR Profile</button>
+        <div class="container">
+            <a href="transformed_file/{{ transformed }}" download >
+                <img src="/static/images/music_icon.png" alt="Music Icon" width="100" height="100">
+            </a>
+            <a href="ir_file/{{ irfile }}" download>
+                <img src="/static/images/music_icon.png" alt="Music Icon" width="100" height="100">
+            </a>
+            <form class='card p-3 bg-light' id="irform">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="more_info">
+                    <label class="form-check-label" for="defaultCheck1">
+                        Save IR File To An IR Profile
+                    </label>
                 </div>
+                <div class="mb-3" id="conditional_part">
+                    <label for="ir_profile_name" class="form-label">Name For IR Profile</label>
+                    <input type="text" class="form-control" id="ir_profile_name">
+                    <input type="hidden" id="ir_filename" name="ir_filename" value="{{ irfile }}">
+                    <div style="text-align: center;">
+                        <button class="btn btn-outline-primary" type="submit" id="inputGroupFileAddon04">Create IR Profile</button>
+                    </div>
+                </div>
+                
+            </form>
+            <div class="d-flex justify-content-center" id="hidden">
             </div>
-            
-        </form>
-        <div class="d-flex justify-content-center" id="hidden">
         </div>
     </div>
     {% endif %}
