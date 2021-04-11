@@ -1,5 +1,4 @@
-"""Insta485 model (database) API."""
-import sqlite3
+"""Tonefinder model (database) API."""
 import MySQLdb
 import MySQLdb.cursors
 import flask
