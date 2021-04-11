@@ -4,7 +4,7 @@ function addToGuitarProfile(name, filename){
         <div class="card-body">
             <h5 class="card-title">${name}</h5>
             <p class="card-text">Download your guitar sample below!</p>
-            <a href="/guitar/${name}.wav" class="card-link">Download!</a>
+            <a href="/guitar/${name}.wav" class="card-link" download>Download!</a>
         </div>
     </div>`;
     $('#guitar_profile').append(g_profile);

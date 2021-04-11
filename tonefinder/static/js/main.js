@@ -28,7 +28,7 @@ irform.addEventListener('submit', event => {
     .then(response => response.json())
     .then(data => {
       console.log('Success:', data);
-      $("#hidden").text("Successfully created IR Profile! Check it at the IR Profile Page");
+      $("#hidden").text("Successfully created Plugin Profile! Check it at the Plugin Profile Page");
     })
 })
 

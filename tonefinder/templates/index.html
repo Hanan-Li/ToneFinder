@@ -23,7 +23,7 @@
                         <a class="nav-link" href="/guitar">Guitar Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/ir">IR Profile</a>
+                        <a class="nav-link" href="/ir">Plugin Profile</a>
                     </li>
 
                 </ul>
@@ -57,8 +57,9 @@
     </nav>
     <!-- Main page shit -->
     <h1 class="text-center">Recreate Your Guitar Tones!</h1>
-    <p class="text-center">Welcome to Tone Finder! Recreate your favorite song's guitar tones using Tone Finder.</p>
-    <p class="text-center">Upload your own guitar recording on the left, and the guitar recording that you want your own to sound like on the right!</p> 
+    <p class="lead text-center">Welcome to Tone Finder! Recreate your favorite song's guitar tones using Tone Finder.</p>
+    <p class="lead text-center">Upload your own guitar recording on the left, and the guitar recording that you want your own to sound like on the right!</p> 
+    <p class="lead text-center">You can also directly use the guitar recording from a saved guitar profile as a source by choosing one in the dropdown menu!</p> 
     
     <div class="container-fluid">
         <div class="container">
@@ -95,15 +96,15 @@
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="more_info">
                     <label class="form-check-label" for="defaultCheck1">
-                        Save IR File To An IR Profile
+                        Save Plugin To An Plugin Profile
                     </label>
                 </div>
                 <div class="mb-3" id="conditional_part">
-                    <label for="ir_profile_name" class="form-label">Name For IR Profile</label>
+                    <label for="ir_profile_name" class="form-label">Name For Plugin Profile</label>
                     <input type="text" class="form-control" id="ir_profile_name">
                     <input type="hidden" id="ir_filename" name="ir_filename" value="{{ irfile }}">
                     <div style="text-align: center;">
-                        <button class="btn btn-outline-primary" type="submit" id="inputGroupFileAddon04">Create IR Profile</button>
+                        <button class="btn btn-outline-primary" type="submit" id="inputGroupFileAddon04">Create Plugin Profile</button>
                     </div>
                 </div>
                 
