@@ -38,9 +38,6 @@
                 <ul class="navbar-nav ms-auto">
                     {% if login %}
                         <li class="nav-item">
-                            <a class="nav-link" href="/user">{{ username }}'s Profile</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="/accounts/logout">Logout</a>
                         </li>
                     {% else %}
@@ -66,8 +63,7 @@
             <form action="" method="post" enctype="multipart/form-data" class='card p-3 bg-light' name="main-form">
                 <div style="text-align: center;">
                     <select class="form-select" aria-label="Default select example" id="guitar_select">
-                        <option selected>Reference to use</option>
-                        <option value="1">Use Uploaded Reference File</option>
+                        <option value="0" selected>Use Uploaded Source File</option>
                       </select>
                 </div>
                 <div class="input-group">
@@ -86,12 +82,28 @@
     {% if submitted %}
     <div class="container-fluid">
         <div class="container">
-            <a href="transformed_file/{{ transformed }}" download >
-                <img src="/static/images/music_icon.png" alt="Music Icon" width="100" height="100">
-            </a>
-            <a href="ir_file/{{ irfile }}" download>
-                <img src="/static/images/music_icon.png" alt="Music Icon" width="100" height="100">
-            </a>
+            <div class="row">
+                <div class="col-md-6 ">
+                    <div class="card" style=>
+                        <div class="card-body">
+                          <h5 class="card-title">Transformed Source</h5>
+                          <p class="card-text">Download your transformed source recording below!</p>
+                          <a href="transformed_file/{{ transformed }}" class="card-link" download>Download</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 jobs_index_middle_panels">
+                    <div class="card" style=>
+                        <div class="card-body">
+                          <h5 class="card-title">Plugin</h5>
+                          <p class="card-text">Download the generated plugin to use in a DAW!</p>
+                          <a href="ir_file/{{ irfile }}" class="card-link" download>Download</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
             <form class='card p-3 bg-light' id="irform">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="more_info">

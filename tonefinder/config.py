@@ -15,6 +15,20 @@ SECRET_KEY = K
 SESSION_COOKIE_NAME = 'login'
 
 # File Upload to var/uploads/
+# IR_FOLDER = os.path.join(
+#     '/mnt/efs/fs1',
+#     'ir'
+# )
+
+# GUITAR_FOLDER = os.path.join(
+#     '/mnt/efs/fs1',
+#     'guitar'
+# )
+
+# TRANSFORMED_FOLDER = os.path.join(
+#     '/mnt/efs/fs1',
+#     'transformed'
+# )
 IR_FOLDER = os.path.join(
     os.path.dirname(os.path.dirname(os.path.realpath(__file__))),
     'var', 'ir'
@@ -30,9 +44,8 @@ TRANSFORMED_FOLDER = os.path.join(
     'var', 'transformed'
 )
 
-
 ALLOWED_EXTENSIONS = set(['wav'])
-MAX_CONTENT_LENGTH = 16 * 1024 * 1024
+MAX_CONTENT_LENGTH = 16 * 1024 * 1024 * 1024
 
 # Database file is var/insta485.sqlite3
 DATABASE_FILENAME = os.path.join(

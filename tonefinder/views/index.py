@@ -28,6 +28,7 @@ def show_index():
         final_dict['submitted'] = False
         # Database portion
         if flask.request.method == 'POST':
+            print(flask.request.form["guitar_select"])
             src_file, ref_file, input_src, input_ref = tonefinder.views.util.save_file()
             print(src_file)
             if src_file != "" and ref_file != "":
